@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,9 +8,33 @@
     <title>SWAPI</title>
     <link rel="stylesheet" href="./index.css">
 </head>
-<body>
 
+<body>
+    <main class="wrapper">
+        <form class="post-form" name="postForm">
+            <h1 class="main__title">Who or what are we looking for?</h1>
+            <div class="main___container" onkeyup="checkInputs()">
+                <select class="text__input">
+                    <option>Root</option>
+                    <option selected>People</option>
+                    <option>Films</option>
+                    <option>Starships</option>
+                    <option>Vehicles</option>
+                    <option>Species</option>
+                    <option>Planets</option>
+                </select>
+                <label for="text-post">
+                    <input class="text__input" name="number" type="number" id="number" minlength="0" placeholder="Enter number">
+                </label>
+                <input class="btn" onclick="publishPost()" type="button" name="btn" id="" value="Go!">
+            </div>
+
+            <div class="posts">
+
+            </div>
+    </main>
 
     <script src="./index.js"></script>
 </body>
+
 </html>
