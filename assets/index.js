@@ -89,68 +89,68 @@ function createPlanetsPage(name, diameter, population, climate) {
   `
 }
 
-function getPeopleData () {
+function getPeopleData(id) {
   fetch(peopleUrl + `${id}`)
-  .then(response => response.json())
-  .then(errordiv.innerHTML = `Идет загрузка...`)
-  .then(json => createPeoplePage(json.name, json.birth_year, json.gender, json.mass, json.eye_color, json.hair_color, json.skin_color))
-  .catch(error => console.error(error))
-  .finally(console.log('Запрос выполнен'))
+    .then(response => response.json())
+    .then(errordiv.innerHTML = `Идет загрузка...`)
+    .then(json => createPeoplePage(json.name, json.birth_year, json.gender, json.mass, json.eye_color, json.hair_color, json.skin_color))
+    .catch(error => console.error(error))
+    .finally(console.log('Запрос выполнен'))
 }
 
-function getFilmsData () {
+function getFilmsData(id) {
   fetch(filmsUrl + `/${id}`)
-  .then(response => response.json())
-  .then(json => createFilmsPage(json.title, json.episode_id, json.director, json.producer))
-  .catch(error => console.error(error))
-  .finally(console.log('Запрос выполнен'))
+    .then(response => response.json())
+    .then(json => createFilmsPage(json.title, json.episode_id, json.director, json.producer))
+    .catch(error => console.error(error))
+    .finally(console.log('Запрос выполнен'))
 }
 
-function getStarshipsData () {
+function getStarshipsData(id) {
   fetch(starshipsUrl + `${id}`)
-      .then(response => response.json())
-      .then(json => createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
-      .catch(error => console.error(error))
-      .finally(console.log('Запрос выполнен'))
+    .then(response => response.json())
+    .then(json => createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
+    .catch(error => console.error(error))
+    .finally(console.log('Запрос выполнен'))
 }
 
-function getVehiclesData () {
+function getVehiclesData(id) {
   fetch(vehiclesUrl + `${id}`)
-  .then(response => response.json())
-  .then(json => createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
-  .catch(error => console.error(error))
+    .then(response => response.json())
+    .then(json => createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
+    .catch(error => console.error(error))
 }
 
-function getSpaciesData () {
+function getSpaciesData(id) {
   fetch(speciesUrl + `${id}`)
-  .then(response => response.json())
-  .then(json => createSpeciesPage(json.name, json.classification, json.designation, json.language))
-  .catch(error => console.error(error))
-  .finally(console.log('Запрос выполнен'))
+    .then(response => response.json())
+    .then(json => createSpeciesPage(json.name, json.classification, json.designation, json.language))
+    .catch(error => console.error(error))
+    .finally(console.log('Запрос выполнен'))
 }
 
-function getPlanetsData () {
+function getPlanetsData(id) {
   fetch(planetsUrl + `${id}`)
-  .then(response => response.json())
-  .then(json => createPlanetsPage(json.name, json.diameter, json.population, json.climate))
-  .catch(error => console.error(error))
-  .finally(console.log('Запрос выполнен'))
+    .then(response => response.json())
+    .then(json => createPlanetsPage(json.name, json.diameter, json.population, json.climate))
+    .catch(error => console.error(error))
+    .finally(console.log('Запрос выполнен'))
 }
 
-function getSelectValue(id) {
+function getSelectValue() {
   const selectedValue = document.getElementById("select-list").value;
   if (selectedValue === "People") {
-    getPeopleData()
+    getPeopleData(numberInput.value)
   } if (selectedValue === "Films") {
-    getFilmsData()
+    getFilmsData(numberInput.value)
   } if (selectedValue === "Starships") {
-    getStarshipsData()
+    getStarshipsData(numberInput.value)
   } if (selectedValue === "Vehicles") {
-    getVehiclesData()
+    getVehiclesData(numberInput.value)
   } if (selectedValue === "Spacies") {
-    getSpaciesData()
+    getSpaciesData(numberInput.value)
   } if (selectedValue === "Planets") {
-    getPlanetsData()
+    getPlanetsData(numberInput.value)
   }
   form.reset()
   blockBtn()
