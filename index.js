@@ -7,15 +7,19 @@ const vehiclesUrl = 'https://swapi.dev/api/vehicles/';
 const speciesUrl = 'https://swapi.dev/api/species'
 const planetsUrl = 'https://swapi.dev/api/planets'
 
-function createPage(title, year,){
+function createPeoplePage(name,birth, gender, mass, eye, hair, skin){
   const containerPost = document.createElement('div')
   containerPost.classList.add('container-post')
-  container.append(containerPost)
+  info.append(containerPost)
   containerPost.innerHTML =
   `
-  <h2 class="title">${title}</h2>
-  <p class="text">${year}</p>
-  <p class="text">${year}</p>
+  <h2 class="title">${name}</h2>
+  <p class="text">Birth year: ${birth}</p>
+  <p class="text">Gender: ${gender}</p>
+  <p class="text">Mass: ${mass}</p>
+  <p class="text">Eye color: ${eye}</p>
+  <p class="text">Hair color: ${hair}</p>
+  <p class="text">Mass: ${skin}</p>
   `
 }
 
@@ -24,12 +28,12 @@ function getSelectValue(id) {
   if (selectedValue === "People") {
     fetch(peopleUrl + `/${id}`)
       .then(response => response.json())
-      .then(json => console.log(json))
+      .then(json => createPeoplePage(json.name,json.birth_year, json.gender, json.mass,json.eye_color,json.hair_color,json.skin_color))
       .catch(error => console.error(error))
   } if (selectedValue === "Films") {
     fetch(filmsUrl + `/${id}`)
       .then(response => response.json())
-      .then(json => console.log(json))
+      .then(json => createPeoplePage(json.title, json.director, json.species))
       .catch(error => console.error(error))
   } if (selectedValue === "Starships") {
     fetch(starshipsUrl + `/${id}`)
