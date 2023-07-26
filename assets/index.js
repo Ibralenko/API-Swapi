@@ -63,7 +63,6 @@ function createStarshpsPage(name, model, manufacturer, length) {
   `
 }
 
-
 function createSpeciesPage(name, classification, designation, language) {
   const containerPost = document.createElement('div')
   containerPost.classList.add('container-post')
@@ -90,46 +89,69 @@ function createPlanetsPage(name, diameter, population, climate) {
   `
 }
 
+function getPeopleData () {
+  fetch(peopleUrl + `${id}`)
+  .then(response => response.json())
+  .then(errordiv.innerHTML = `Идет загрузка...`)
+  .then(json => createPeoplePage(json.name, json.birth_year, json.gender, json.mass, json.eye_color, json.hair_color, json.skin_color))
+  .catch(error => console.error(error))
+  .finally(console.log('Запрос выполнен'))
+}
+
+function getFilmsData () {
+  fetch(filmsUrl + `/${id}`)
+  .then(response => response.json())
+  .then(json => createFilmsPage(json.title, json.episode_id, json.director, json.producer))
+  .catch(error => console.error(error))
+  .finally(console.log('Запрос выполнен'))
+}
+
+function getStarshipsData () {
+  fetch(starshipsUrl + `${id}`)
+      .then(response => response.json())
+      .then(json => createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
+      .catch(error => console.error(error))
+      .finally(console.log('Запрос выполнен'))
+}
+
+function getVehiclesData () {
+  fetch(vehiclesUrl + `${id}`)
+  .then(response => response.json())
+  .then(json => createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
+  .catch(error => console.error(error))
+}
+
+function getSpaciesData () {
+  fetch(speciesUrl + `${id}`)
+  .then(response => response.json())
+  .then(json => createSpeciesPage(json.name, json.classification, json.designation, json.language))
+  .catch(error => console.error(error))
+  .finally(console.log('Запрос выполнен'))
+}
+
+function getPlanetsData () {
+  fetch(planetsUrl + `${id}`)
+  .then(response => response.json())
+  .then(json => createPlanetsPage(json.name, json.diameter, json.population, json.climate))
+  .catch(error => console.error(error))
+  .finally(console.log('Запрос выполнен'))
+}
+
 function getSelectValue(id) {
   const selectedValue = document.getElementById("select-list").value;
   if (selectedValue === "People") {
-    fetch(peopleUrl + `${id}`)
-      .then(response => response.json())
-      .then(errordiv.innerHTML = `Идет загрузка...`)
-      .then(json => createPeoplePage(json.name, json.birth_year, json.gender, json.mass, json.eye_color, json.hair_color, json.skin_color))
-      .catch(error => console.error(error))
-      .finally(console.log('Запрос выполнен'))
+    getPeopleData()
   } if (selectedValue === "Films") {
-    fetch(filmsUrl + `/${id}`)
-      .then(response => response.json())
-      .then(json => createFilmsPage(json.title, json.episode_id, json.director, json.producer))
-      .catch(error => console.error(error))
-      .finally(console.log('Запрос выполнен'))
+    getFilmsData()
   } if (selectedValue === "Starships") {
-    fetch(starshipsUrl + `${id}`)
-      .then(response => response.json())
-      .then(json => createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
-      .catch(error => console.error(error))
-      .finally(console.log('Запрос выполнен'))
+    getStarshipsData()
   } if (selectedValue === "Vehicles") {
-    fetch(vehiclesUrl + `${id}`)
-      .then(response => response.json())
-      .then(json => createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
-      .catch(error => console.error(error))
+    getVehiclesData()
   } if (selectedValue === "Spacies") {
-    fetch(speciesUrl + `${id}`)
-      .then(response => response.json())
-      .then(json => createSpeciesPage(json.name, json.classification, json.designation, json.language))
-      .catch(error => console.error(error))
-      .finally(console.log('Запрос выполнен'))
+    getSpaciesData()
   } if (selectedValue === "Planets") {
-    fetch(planetsUrl + `${id}`)
-      .then(response => response.json())
-      .then(json => createPlanetsPage(json.name, json.diameter, json.population, json.climate))
-      .catch(error => console.error(error))
-      .finally(console.log('Запрос выполнен'))
+    getPlanetsData()
   }
   form.reset()
   blockBtn()
 }
-
