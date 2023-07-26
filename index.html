@@ -14,18 +14,18 @@
         <form class="post-form" name="postForm">
             <h1 class="main__title">Who or what are we looking for?</h1>
             <div class="main___container">
-                <select class="text__input" onkeyup="checkInputs()">
-                    <option selected value="1">People</option>
-                    <option value="2">Films</option>
-                    <option value="3">Starships</option>
-                    <option value="4">Vehicles</option>
-                    <option value="5">Species</option>
-                    <option value="6">Planets</option>
+                <select class="text__input" id="select-list" onkeyup="getSelectValue()">
+                    <option selected value="People">People</option>
+                    <option value="Films">Films</option>
+                    <option value="Starships">Starships</option>
+                    <option value="Vehicles">Vehicles</option>
+                    <option value="Species">Species</option>
+                    <option value="Planets">Planets</option>
                 </select>
                 <label for="number">
                     <input class="text__input" name="number" type="number" id="number" minlength="1" maxlength="10" placeholder="Enter number from 1 to 10">
                 </label>
-                <input class="btn" onclick="publishPost()" type="button" name="btn" id="" value="Go!">
+                <input class="btn"  onclick="getSelectValue()" type="button" name="btn" id="" value="Go!">
             </div>
 
             <div class="info">
