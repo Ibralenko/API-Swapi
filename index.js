@@ -1,5 +1,6 @@
 const numberInput = document.querySelector('#number');
 const info = document.querySelector('.info')
+const error = document.querySelector('.error')
 const peopleUrl = 'https://swapi.dev/api/people/';
 const filmsUrl = 'https://swapi.dev/api/films/';
 const starshipsUrl = 'https://swapi.dev/api/starships/';
@@ -22,6 +23,18 @@ function createPeoplePage(name,birth, gender, mass, eye, hair, skin){
   <p class="text">Mass: ${skin}</p>
   `
 }
+
+function blockBtn() {
+  numberInput.value === '' ? document.querySelector('.btn').disabled = true : document.querySelector('.btn').disabled = false
+}
+blockBtn()
+
+function checkInput(){
+  if (numberInput.value <= 0 || numberInput.value >= 11){
+    alert('Enter number from 1 to 10')
+  }
+}
+
 
 function createFilmsPage (title, episode, director, producer){
   const containerPost = document.createElement('div')

@@ -13,7 +13,8 @@
     <main class="wrapper">
         <form class="post-form" name="postForm">
             <h1 class="main__title">Who or what are we looking for?</h1>
-            <div class="main___container">
+            <div class="error"></div>
+            <div class="main___container" onkeyup="blockBtn()">
                 <select class="text__input" id="select-list" onkeyup="getSelectValue()">
                     <option selected value="People">People</option>
                     <option value="Films">Films</option>
@@ -22,7 +23,7 @@
                     <option value="Species">Species</option>
                     <option value="Planets">Planets</option>
                 </select>
-                <label for="number">
+                <label for="number" onchange="checkInput()">
                     <input class="text__input" name="number" type="number" id="number" minlength="1" maxlength="10" placeholder="Enter number from 1 to 10">
                 </label>
                 <input class="btn"  onclick="getSelectValue(numberInput.value)" type="button" name="btn" id="" value="Go!">
