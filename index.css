@@ -1,3 +1,7 @@
+body{
+    background-color:black;
+}
+
 .wrapper {
     box-sizing: border-box;
     margin: 0 auto;
@@ -6,8 +10,15 @@
 
 .main__title {
     text-align: center;
+    color: white;
 }
-
+.main-img{
+    width: 300px;
+    height: 200px;
+}
+.form{
+    text-align: center;
+}
 .main___container {
     margin: 0 auto;
     width: 700px;
@@ -28,20 +39,31 @@
 .btn {
     box-shadow: 10px 5px 5px rgb(63, 63, 63);
     cursor: pointer;
-    background-color: rgb(202, 60, 84);
+    color: black;
+    background-color: rgb(247, 247, 104);
     width: 200px;
     height: 50px;
-    border: 1px solid rgb(136, 2, 2);
-
+    border: 1px solid rgb(240, 224, 4);
 }
 
 .btn:hover {
     opacity: 0.9;
 }
-
-.post-container {
+.btn:disabled{
+    color: rgb(201, 197, 197);
+    background-color: rgb(249, 249, 198);
+}
+.info,
+.container-info {
     text-align: center;
-    border: 1px dotted black;
+    border: 1px dotted rgb(235, 224, 8);
     box-shadow: 10px 5px 5px rgb(63, 63, 63);
     margin-bottom: 10px;
+}
+.title{
+    font-size: 35px;
+    color: white;
+}
+p{
+    color: rgb(239, 237, 234);
 }

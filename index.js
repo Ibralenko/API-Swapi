@@ -1,6 +1,7 @@
 const numberInput = document.querySelector('#number');
 const info = document.querySelector('.info')
-const error = document.querySelector('.error')
+const errordiv = document.querySelector('.error')
+const form = document.querySelector('.form')
 const peopleUrl = 'https://swapi.dev/api/people/';
 const filmsUrl = 'https://swapi.dev/api/films/';
 const starshipsUrl = 'https://swapi.dev/api/starships/';
@@ -8,12 +9,24 @@ const vehiclesUrl = 'https://swapi.dev/api/vehicles/';
 const speciesUrl = 'https://swapi.dev/api/species/'
 const planetsUrl = 'https://swapi.dev/api/planets/'
 
-function createPeoplePage(name,birth, gender, mass, eye, hair, skin){
+
+function blockBtn() {
+  numberInput.value === '' ? document.querySelector('.btn').disabled = true : document.querySelector('.btn').disabled = false
+}
+blockBtn()
+
+function checkInput() {
+  if (numberInput.value <= 0 || numberInput.value >= 11) {
+    alert('Enter number from 1 to 10')
+  }
+}
+
+function createPeoplePage(name, birth, gender, mass, eye, hair, skin) {
   const containerPost = document.createElement('div')
-  containerPost.classList.add('container-post')
+  containerPost.classList.add('container-info')
   info.append(containerPost)
   containerPost.innerHTML =
-  `
+    `
   <h2 class="title">${name}</h2>
   <p class="text">Birth year: ${birth}</p>
   <p class="text">Gender: ${gender}</p>
@@ -24,24 +37,13 @@ function createPeoplePage(name,birth, gender, mass, eye, hair, skin){
   `
 }
 
-function blockBtn() {
-  numberInput.value === '' ? document.querySelector('.btn').disabled = true : document.querySelector('.btn').disabled = false
-}
-blockBtn()
 
-function checkInput(){
-  if (numberInput.value <= 0 || numberInput.value >= 11){
-    alert('Enter number from 1 to 10')
-  }
-}
-
-
-function createFilmsPage (title, episode, director, producer){
+function createFilmsPage(title, episode, director, producer) {
   const containerPost = document.createElement('div')
   containerPost.classList.add('container-post')
   info.append(containerPost)
   containerPost.innerHTML =
-  `
+    `
   <h2 class="title">${title}</h2>
   <p class="text">Episode: ${episode}</p>
   <p class="text">Director: ${director}</p>
@@ -49,12 +51,12 @@ function createFilmsPage (title, episode, director, producer){
   `
 }
 
-function createStarshpsPage (name, model, manufacturer, length){
+function createStarshpsPage(name, model, manufacturer, length) {
   const containerPost = document.createElement('div')
   containerPost.classList.add('container-post')
   info.append(containerPost)
   containerPost.innerHTML =
-  `
+    `
   <h2 class="title">${name}</h2>
   <p class="text">Model: ${model}</p>
   <p class="text">Manufacturer : ${manufacturer}</p>
@@ -63,12 +65,12 @@ function createStarshpsPage (name, model, manufacturer, length){
 }
 
 
-function createSpeciesPage (name, classification, designation, language){
+function createSpeciesPage(name, classification, designation, language) {
   const containerPost = document.createElement('div')
   containerPost.classList.add('container-post')
   info.append(containerPost)
   containerPost.innerHTML =
-  `
+    `
   <h2 class="title">${name}</h2>
   <p class="text">Classification: ${classification}</p>
   <p class="text">Designation : ${designation}</p>
@@ -76,18 +78,19 @@ function createSpeciesPage (name, classification, designation, language){
   `
 }
 
-function createPlanetsPage (name, diameter, population, climate ){
+function createPlanetsPage(name, diameter, population, climate) {
   const containerPost = document.createElement('div')
   containerPost.classList.add('container-post')
   info.append(containerPost)
   containerPost.innerHTML =
-  `
+    `
   <h2 class="title">${name}</h2>
   <p class="text">diameter: ${diameter}</p>
   <p class="text">population : ${population}</p>
-  <p class="text">climate : ${climate }</p>
+  <p class="text">climate : ${climate}</p>
   `
 }
+
 
 
 function getSelectValue(id) {
@@ -95,7 +98,8 @@ function getSelectValue(id) {
   if (selectedValue === "People") {
     fetch(peopleUrl + `${id}`)
       .then(response => response.json())
-      .then(json => createPeoplePage(json.name,json.birth_year, json.gender, json.mass,json.eye_color,json.hair_color,json.skin_color))
+      .then(errordiv.innerHTML = `Идет загрузка...`)
+      .then(json => createPeoplePage(json.name, json.birth_year, json.gender, json.mass, json.eye_color, json.hair_color, json.skin_color))
       .catch(error => console.error(error))
       .finally(console.log('Запрос выполнен'))
   } if (selectedValue === "Films") {
@@ -107,7 +111,7 @@ function getSelectValue(id) {
   } if (selectedValue === "Starships") {
     fetch(starshipsUrl + `${id}`)
       .then(response => response.json())
-      .then(json =>  createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
+      .then(json => createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
       .catch(error => console.error(error))
       .finally(console.log('Запрос выполнен'))
   } if (selectedValue === "Vehicles") {
@@ -128,5 +132,6 @@ function getSelectValue(id) {
       .catch(error => console.error(error))
       .finally(console.log('Запрос выполнен'))
   }
+  form.reset()
 }
 
