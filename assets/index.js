@@ -37,7 +37,6 @@ function createPeoplePage(name, birth, gender, mass, eye, hair, skin) {
   `
 }
 
-
 function createFilmsPage(title, episode, director, producer) {
   const containerPost = document.createElement('div')
   containerPost.classList.add('container-post')
@@ -91,8 +90,6 @@ function createPlanetsPage(name, diameter, population, climate) {
   `
 }
 
-
-
 function getSelectValue(id) {
   const selectedValue = document.getElementById("select-list").value;
   if (selectedValue === "People") {
@@ -133,5 +130,6 @@ function getSelectValue(id) {
       .finally(console.log('Запрос выполнен'))
   }
   form.reset()
+  blockBtn()
 }
 

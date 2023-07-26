@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SWAPI</title>
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./assets/index.css">
 </head>
 
 <body>
     <main class="wrapper">
-        <form class="form" name="postForm"  onkeyup="blockBtn()">
+        <form class="form" name="postForm" onkeyup="blockBtn()" >
             <img class="main-img" src="./assets/img/Star_Wars_Logo.svg" alt="StarWars">
             <h1 class="main__title">Who or what are we looking for?</h1>
             <p class="error"></p>
-            <div class="main___container">
+            <div class="main___container"  >
                 <select class="text__input" id="select-list" onkeyup="getSelectValue()">
                     <option selected value="People">People</option>
                     <option value="Films">Films</option>
@@ -24,8 +24,8 @@
                     <option value="Species">Species</option>
                     <option value="Planets">Planets</option>
                 </select>
-                <label for="number" onchange="checkInput()">
-                    <input class="text__input" name="number" type="number" id="number" minlength="1" maxlength="10" placeholder="Enter number from 1 to 10">
+                <label for="number" onchange="checkInput()" >
+                    <input  class="text__input" name="number" type="number" id="number" minlength="1" maxlength="10" placeholder="Enter number from 1 to 10">
                 </label>
                 <input class="btn"  onclick="getSelectValue(numberInput.value)" type="button" name="btn" id="" value="Go!">
             </div>
@@ -35,7 +35,7 @@
             </div>
     </main>
 
-    <script src="./index.js"></script>
+    <script src="./assets/index.js"></script>
 </body>
 
 </html>
