@@ -1,6 +1,6 @@
 const numberInput = document.querySelector('#number');
 const info = document.querySelector('.info')
-const errordiv = document.querySelector('.error')
+const errorDiv = document.querySelector('.error')
 const form = document.querySelector('.form')
 const peopleUrl = 'https://swapi.dev/api/people/';
 const filmsUrl = 'https://swapi.dev/api/films/';
@@ -21,6 +21,10 @@ function checkInput() {
   }
 }
 
+const hiddenLoader = () => {
+  errorDiv.style.display  = 'none';
+}
+
 function createPeoplePage(name, birth, gender, mass, eye, hair, skin) {
   const containerPost = document.createElement('div')
   containerPost.classList.add('container-info')
@@ -39,7 +43,7 @@ function createPeoplePage(name, birth, gender, mass, eye, hair, skin) {
 
 function createFilmsPage(title, episode, director, producer) {
   const containerPost = document.createElement('div')
-  containerPost.classList.add('container-post')
+  containerPost.classList.add('container-info')
   info.append(containerPost)
   containerPost.innerHTML =
     `
@@ -52,7 +56,7 @@ function createFilmsPage(title, episode, director, producer) {
 
 function createStarshpsPage(name, model, manufacturer, length) {
   const containerPost = document.createElement('div')
-  containerPost.classList.add('container-post')
+  containerPost.classList.add('container-info')
   info.append(containerPost)
   containerPost.innerHTML =
     `
@@ -65,7 +69,7 @@ function createStarshpsPage(name, model, manufacturer, length) {
 
 function createSpeciesPage(name, classification, designation, language) {
   const containerPost = document.createElement('div')
-  containerPost.classList.add('container-post')
+  containerPost.classList.add('container-info')
   info.append(containerPost)
   containerPost.innerHTML =
     `
@@ -78,7 +82,7 @@ function createSpeciesPage(name, classification, designation, language) {
 
 function createPlanetsPage(name, diameter, population, climate) {
   const containerPost = document.createElement('div')
-  containerPost.classList.add('container-post')
+  containerPost.classList.add('container-info')
   info.append(containerPost)
   containerPost.innerHTML =
     `
@@ -92,7 +96,7 @@ function createPlanetsPage(name, diameter, population, climate) {
 function getPeopleData(id) {
   fetch(peopleUrl + `${id}`)
     .then(response => response.json())
-    .then(errordiv.innerHTML = `Идет загрузка...`)
+    .then(errorDiv.innerHTML = `Идет загрузка...`)
     .then(json => createPeoplePage(json.name, json.birth_year, json.gender, json.mass, json.eye_color, json.hair_color, json.skin_color))
     .catch(error => console.error(error))
     .finally(console.log('Запрос выполнен'))
@@ -154,4 +158,5 @@ function getSelectValue() {
   }
   form.reset()
   blockBtn()
+  setTimeout(hiddenLoader, 800);
 }

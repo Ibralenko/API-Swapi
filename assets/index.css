@@ -67,3 +67,7 @@ body{
 p{
     color: rgb(239, 237, 234);
 }
+
+.hidden{
+    display: none;
+}
