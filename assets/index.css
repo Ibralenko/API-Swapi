@@ -67,6 +67,9 @@ body{
 p{
     color: rgb(239, 237, 234);
 }
+.loader{
+    width: 100px;
+}
 
 .hidden{
     display: none;

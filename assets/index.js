@@ -1,12 +1,11 @@
 const numberInput = document.querySelector('#number');
 const info = document.querySelector('.info')
+const loadingDiv = document.querySelector('.loading')
 const errorDiv = document.querySelector('.error')
 const form = document.querySelector('.form')
 const peopleUrl = 'https://swapi.dev/api/people/';
 const filmsUrl = 'https://swapi.dev/api/films/';
 const starshipsUrl = 'https://swapi.dev/api/starships/';
-const vehiclesUrl = 'https://swapi.dev/api/vehicles/';
-const speciesUrl = 'https://swapi.dev/api/species/'
 const planetsUrl = 'https://swapi.dev/api/planets/'
 
 
@@ -21,8 +20,12 @@ function checkInput() {
   }
 }
 
+const loader = () => {
+  loadingDiv.innerHTML = `Идет загрузка...`
+}
+
 const hiddenLoader = () => {
-  errorDiv.style.display  = 'none';
+  loadingDiv.style.display = 'none';
 }
 
 function createPeoplePage(name, birth, gender, mass, eye, hair, skin) {
@@ -47,7 +50,7 @@ function createFilmsPage(title, episode, director, producer) {
   info.append(containerPost)
   containerPost.innerHTML =
     `
-  <h2 class="title">${title}</h2>
+  <h2 class="title">Film: ${title}</h2>
   <p class="text">Episode: ${episode}</p>
   <p class="text">Director: ${director}</p>
   <p class="text">Producer: ${producer}</p>
@@ -60,25 +63,13 @@ function createStarshpsPage(name, model, manufacturer, length) {
   info.append(containerPost)
   containerPost.innerHTML =
     `
-  <h2 class="title">${name}</h2>
+  <h2 class="title">Starship: ${name}</h2>
   <p class="text">Model: ${model}</p>
   <p class="text">Manufacturer : ${manufacturer}</p>
   <p class="text">Length: ${length}</p>
   `
 }
 
-function createSpeciesPage(name, classification, designation, language) {
-  const containerPost = document.createElement('div')
-  containerPost.classList.add('container-info')
-  info.append(containerPost)
-  containerPost.innerHTML =
-    `
-  <h2 class="title">${name}</h2>
-  <p class="text">Classification: ${classification}</p>
-  <p class="text">Designation : ${designation}</p>
-  <p class="text">Language: ${language}</p>
-  `
-}
 
 function createPlanetsPage(name, diameter, population, climate) {
   const containerPost = document.createElement('div')
@@ -86,59 +77,77 @@ function createPlanetsPage(name, diameter, population, climate) {
   info.append(containerPost)
   containerPost.innerHTML =
     `
-  <h2 class="title">${name}</h2>
+  <h2 class="title">Planet: ${name}</h2>
   <p class="text">diameter: ${diameter}</p>
   <p class="text">population : ${population}</p>
   <p class="text">climate : ${climate}</p>
   `
 }
 
-function getPeopleData(id) {
-  fetch(peopleUrl + `${id}`)
-    .then(response => response.json())
-    .then(errorDiv.innerHTML = `Идет загрузка...`)
-    .then(json => createPeoplePage(json.name, json.birth_year, json.gender, json.mass, json.eye_color, json.hair_color, json.skin_color))
-    .catch(error => console.error(error))
-    .finally(console.log('Запрос выполнен'))
+async function getPeopleData(id) {
+  try {
+    loader()
+    const response = await fetch(peopleUrl + `${id}`)
+    const data = await response.json()
+    createPeoplePage(data.name, data.birth_year, data.gender, data.mass, data.eye_color, data.hair_color, data.skin_color)
+    hiddenLoader()
+  }
+  catch (error) {
+    console.log(error)
+  }
+  finally {
+    console.log('Запрос выполнен')
+  }
 }
 
-function getFilmsData(id) {
-  fetch(filmsUrl + `/${id}`)
-    .then(response => response.json())
-    .then(json => createFilmsPage(json.title, json.episode_id, json.director, json.producer))
-    .catch(error => console.error(error))
-    .finally(console.log('Запрос выполнен'))
+
+async function getFilmsData(id) {
+  try {
+    loader()
+    const response = await fetch(filmsUrl + `${id}`)
+    const data = await response.json()
+    createFilmsPage(data.title, data.episode_id, data.director, data.producer)
+    hiddenLoader()
+  }
+  catch (error) {
+    console.log(error)
+  }
+  finally {
+    console.log('Запрос выполнен')
+  }
 }
 
-function getStarshipsData(id) {
-  fetch(starshipsUrl + `${id}`)
-    .then(response => response.json())
-    .then(json => createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
-    .catch(error => console.error(error))
-    .finally(console.log('Запрос выполнен'))
+async function getStarshipsData(id) {
+  try {
+    loader()
+    const response = await fetch(starshipsUrl + `${id}`)
+    const data = await response.json()
+    createStarshpsPage(data.name, data.model, data.manufacturer, data.length)
+    hiddenLoader()
+  }
+  catch (error) {
+    console.log(error)
+  }
+  finally {
+    console.log('Запрос выполнен')
+  }
 }
 
-function getVehiclesData(id) {
-  fetch(vehiclesUrl + `${id}`)
-    .then(response => response.json())
-    .then(json => createStarshpsPage(json.name, json.model, json.manufacturer, json.length))
-    .catch(error => console.error(error))
-}
 
-function getSpaciesData(id) {
-  fetch(speciesUrl + `${id}`)
-    .then(response => response.json())
-    .then(json => createSpeciesPage(json.name, json.classification, json.designation, json.language))
-    .catch(error => console.error(error))
-    .finally(console.log('Запрос выполнен'))
-}
-
-function getPlanetsData(id) {
-  fetch(planetsUrl + `${id}`)
-    .then(response => response.json())
-    .then(json => createPlanetsPage(json.name, json.diameter, json.population, json.climate))
-    .catch(error => console.error(error))
-    .finally(console.log('Запрос выполнен'))
+async function getPlanetsData(id) {
+  try {
+    loader()
+    const response = await fetch(planetsUrl + `${id}`)
+    const data = await response.json()
+    createPlanetsPage(data.name, data.diameter, data.population, data.climate)
+    hiddenLoader()
+  }
+  catch (error) {
+    console.error(error)
+  }
+  finally {
+    console.log('Запрос выполнен')
+  }
 }
 
 function getSelectValue() {
@@ -149,14 +158,9 @@ function getSelectValue() {
     getFilmsData(numberInput.value)
   } if (selectedValue === "Starships") {
     getStarshipsData(numberInput.value)
-  } if (selectedValue === "Vehicles") {
-    getVehiclesData(numberInput.value)
-  } if (selectedValue === "Spacies") {
-    getSpaciesData(numberInput.value)
   } if (selectedValue === "Planets") {
     getPlanetsData(numberInput.value)
   }
   form.reset()
   blockBtn()
-  setTimeout(hiddenLoader, 800);
 }
