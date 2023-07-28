@@ -23,6 +23,7 @@ function checkInput() {
 
 const loader = () => {
   loadingDiv.innerHTML = `Идет загрузка...`
+  loadingDiv.style.display = 'block';
 }
 
 const hiddenLoader = () => {
@@ -58,7 +59,7 @@ function createFilmsPage(title, episode, director, producer) {
   `
 }
 
-function createStarshpsPage(name, model, manufacturer, length) {
+function createStarshipsPage(name, model, manufacturer, length) {
   const containerPost = document.createElement('div')
   containerPost.classList.add('container-info')
   info.append(containerPost)
@@ -84,6 +85,7 @@ function createPlanetsPage(name, diameter, population, climate) {
   <p class="text">climate : ${climate}</p>
   `
 }
+
 
 async function getPeopleData(id) {
   try {
@@ -123,7 +125,7 @@ async function getStarshipsData(id) {
     loader()
     const response = await fetch(starshipsUrl + `${id}`)
     const data = await response.json()
-    createStarshpsPage(data.name, data.model, data.manufacturer, data.length)
+    createStarshipsPage(data.name, data.model, data.manufacturer, data.length)
     hiddenLoader()
   }
   catch (error) {
@@ -169,4 +171,5 @@ function getSelectValue() {
 btn.addEventListener('click', event => {
   event.preventDefault()
   info.textContent = ''
+  getSelectValue(numberInput.value)
 })
