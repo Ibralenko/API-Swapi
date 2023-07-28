@@ -3,6 +3,7 @@ const info = document.querySelector('.info')
 const loadingDiv = document.querySelector('.loading')
 const errorDiv = document.querySelector('.error')
 const form = document.querySelector('.form')
+const btn = document.querySelector('.btn')
 const peopleUrl = 'https://swapi.dev/api/people/';
 const filmsUrl = 'https://swapi.dev/api/films/';
 const starshipsUrl = 'https://swapi.dev/api/starships/';
@@ -164,3 +165,8 @@ function getSelectValue() {
   form.reset()
   blockBtn()
 }
+
+btn.addEventListener('click', event => {
+  event.preventDefault()
+  info.textContent = ''
+})
