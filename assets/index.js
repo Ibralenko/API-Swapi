@@ -148,7 +148,6 @@ async function getPlanetsData(id) {
   }
   catch (error) {
     console.error(error)
-    throw error;
   }
   finally {
     console.log('Запрос выполнен')
