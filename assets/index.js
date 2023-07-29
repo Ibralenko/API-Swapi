@@ -73,6 +73,7 @@ function createStarshipsPage(name, model, manufacturer, length) {
 }
 
 
+
 function createPlanetsPage(name, diameter, population, climate) {
   const containerPost = document.createElement('div')
   containerPost.classList.add('container-info')
@@ -147,6 +148,7 @@ async function getPlanetsData(id) {
   }
   catch (error) {
     console.error(error)
+    throw error;
   }
   finally {
     console.log('Запрос выполнен')
