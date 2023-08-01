@@ -11,8 +11,7 @@ const PLANETS_URL = 'https://swapi.dev/api/planets/'
 
 
 function disableBtn() {
-  numberInput.value === '' ? document.querySelector('.btn').disabled = true : document.querySelector('.btn').disabled = false
-}
+  document.querySelector('.btn').disabled = numberInput.value === '';}
 disableBtn()
 
 function checkInput() {
