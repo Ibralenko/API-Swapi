@@ -4,16 +4,16 @@ const loadingDiv = document.querySelector('.loading')
 const errorDiv = document.querySelector('.error')
 const form = document.querySelector('.form')
 const btn = document.querySelector('.btn')
-const peopleUrl = 'https://swapi.dev/api/people/';
-const filmsUrl = 'https://swapi.dev/api/films/';
-const starshipsUrl = 'https://swapi.dev/api/starships/';
-const planetsUrl = 'https://swapi.dev/api/planets/'
+const PEOPLE_URl = 'https://swapi.dev/api/people/';
+const FILMS_URL = 'https://swapi.dev/api/films/';
+const STARSHIPS_URL = 'https://swapi.dev/api/starships/';
+const PLANETS_URL = 'https://swapi.dev/api/planets/'
 
 
-function blockBtn() {
+function disableBtn() {
   numberInput.value === '' ? document.querySelector('.btn').disabled = true : document.querySelector('.btn').disabled = false
 }
-blockBtn()
+disableBtn()
 
 function checkInput() {
   if (numberInput.value <= 0 || numberInput.value >= 11) {
@@ -91,7 +91,7 @@ function createPlanetsPage(name, diameter, population, climate) {
 async function getPeopleData(id) {
   try {
     loader()
-    const response = await fetch(peopleUrl + `${id}`)
+    const response = await fetch(PEOPLE_URl + `${id}`)
     const data = await response.json()
     createPeoplePage(data.name, data.birth_year, data.gender, data.mass, data.eye_color, data.hair_color, data.skin_color)
     hiddenLoader()
@@ -108,7 +108,7 @@ async function getPeopleData(id) {
 async function getFilmsData(id) {
   try {
     loader()
-    const response = await fetch(filmsUrl + `${id}`)
+    const response = await fetch(FILMS_URL + `${id}`)
     const data = await response.json()
     createFilmsPage(data.title, data.episode_id, data.director, data.producer)
     hiddenLoader()
@@ -124,7 +124,7 @@ async function getFilmsData(id) {
 async function getStarshipsData(id) {
   try {
     loader()
-    const response = await fetch(starshipsUrl + `${id}`)
+    const response = await fetch(STARSHIPS_URL + `${id}`)
     const data = await response.json()
     createStarshipsPage(data.name, data.model, data.manufacturer, data.length)
     hiddenLoader()
@@ -141,7 +141,7 @@ async function getStarshipsData(id) {
 async function getPlanetsData(id) {
   try {
     loader()
-    const response = await fetch(planetsUrl + `${id}`)
+    const response = await fetch(PLANETS_URL + `${id}`)
     const data = await response.json()
     createPlanetsPage(data.name, data.diameter, data.population, data.climate)
     hiddenLoader()
@@ -158,15 +158,15 @@ function getSelectValue() {
   const selectedValue = document.getElementById("select-list").value;
   if (selectedValue === "People") {
     getPeopleData(numberInput.value)
-  } if (selectedValue === "Films") {
+  } else if (selectedValue === "Films") {
     getFilmsData(numberInput.value)
-  } if (selectedValue === "Starships") {
+  } else if (selectedValue === "Starships") {
     getStarshipsData(numberInput.value)
-  } if (selectedValue === "Planets") {
+  } else if (selectedValue === "Planets") {
     getPlanetsData(numberInput.value)
   }
   form.reset()
-  blockBtn()
+  disableBtn()
 }
 
 btn.addEventListener('click', event => {
